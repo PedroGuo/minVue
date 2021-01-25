@@ -12,16 +12,17 @@
   - 负责调用 Observer 对象，监听数据的变化
   - 负责调用 compiler 对象，解析执行和插值表达式
 - Observer
-  - 负责把 data 中的属性转换成 getter 和 setter
+  - 设置“陷阱”负责把 data 中的属性转换成 getter 和 setter
   - 数据变化时发送通知
 - Complier
   - 负责编译模板，解析指令和插值表达式
 - Dep
-  - 收集依赖，存储所有观察者
+  - 被观察者，存储所有观察者
   - 添加观察者
   - 发送通知
 - Watcher
-  - 当依赖发生变化后，Dep 会通知所有的观察者，去更新视图
+  - 观察者，
+  - 被观察者发生变化后，去更新视图
 
 ### 前期准备工作
 
@@ -68,7 +69,7 @@
 
 在模拟 Vue 之前，我们先来看看这个 vm 实例有什么，我们可以到[官网](https://cn.vuejs.org/v2/guide/index.html)上去看，打开 F12,在 console 面板输入 `app`,就可以看到这个实例包含的属性了,如下图：
 
-![image](https://user-images.githubusercontent.com/19791710/87932191-af7c2580-cabd-11ea-9c06-41fb540ddf33.png)
+![image](./img/data-1.png)
 
 我们可以看到有$options、$data、\$el、message、get message、set message 这几个属性。其中:
 
@@ -120,7 +121,7 @@ class Vue {
 
 写完后，我们来校验以下，我们需要在 index.html 引入 vue.js,引入后，我们通过浏览器打开 index.html，打开控制台，切换到 console 面板，输入 vm，可以看到以下内容：
 
-![image](https://user-images.githubusercontent.com/19791710/87934160-18b16800-cac1-11ea-9156-324839281773.png)
+![image](./img/data-2.png)
 
 我们看到，$options、$data、$el 已经被我们记录下来了，并且$data 中的成员已经被注入到实例中来了，并且已经转换成 getter 和 setter 了。
 
